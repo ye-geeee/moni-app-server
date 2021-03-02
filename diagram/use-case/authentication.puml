@@ -1,0 +1,33 @@
+@startuml authenticaion
+
+skinparam actorStyle awesome
+left to right direction
+
+actor 사용자 as USER
+
+rectangle Authentication {
+    usecase "Create Account" as AUTH_CREATE
+    usecase "Delete Account" as AUTH_DELETE
+
+    usecase "Sign in" as AUTH_SIGN_IN
+    usecase "Sign out" as AUTH_SIGN_OUT
+
+    usecase "Find Account" as AUTH_FIND
+    usecase "Find ID" as AUTH_FIND_ID
+    usecase "Find PWD" as AUTH_FIND_PWD
+
+    USER --> AUTH_CREATE
+    USER --> AUTH_DELETE
+
+    USER --> AUTH_SIGN_IN
+    USER --> AUTH_SIGN_OUT
+    AUTH_SIGN_IN <.. AUTH_SIGN_OUT : <<include>>
+
+    USER --> AUTH_FIND_ID
+    USER --> AUTH_FIND_PWD
+
+    AUTH_FIND_ID --|> AUTH_FIND
+    AUTH_FIND_PWD --|> AUTH_FIND
+}
+
+@enduml
