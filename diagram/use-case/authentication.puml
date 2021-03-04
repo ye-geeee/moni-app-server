@@ -1,8 +1,5 @@
 @startuml authenticaion
 
-skinparam actorStyle awesome
-left to right direction
-
 actor 사용자 as USER
 
 rectangle Authentication {
@@ -18,16 +15,13 @@ rectangle Authentication {
 
     USER --> AUTH_CREATE
     USER --> AUTH_DELETE
+    USER --> AUTH_FIND
+
+    AUTH_FIND_ID ..up..> AUTH_FIND
+    AUTH_FIND_PWD ..up..> AUTH_FIND
 
     USER --> AUTH_SIGN_IN
     USER --> AUTH_SIGN_OUT
-    AUTH_SIGN_IN <.. AUTH_SIGN_OUT : <<include>>
-
-    USER --> AUTH_FIND_ID
-    USER --> AUTH_FIND_PWD
-
-    AUTH_FIND_ID --|> AUTH_FIND
-    AUTH_FIND_PWD --|> AUTH_FIND
 }
 
 @enduml
