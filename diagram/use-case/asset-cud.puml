@@ -1,0 +1,46 @@
+@startuml
+
+actor 사용자 as USER
+
+rectangle "Asset CUD" {
+    usecase "Add Bank Account" as ADD_BA
+    usecase "Update Bank Account" as UP_BA
+    usecase "Delete Bank Account" as DEL_BA
+
+    USER --> ADD_BA
+    USER --> UP_BA
+    USER --> DEL_BA
+
+    usecase "Add Account\nCategory" as ADD_BA_CAT
+    usecase "Add Account\nCash" as ADD_BA_CASH
+    usecase "Add Account\nBankInfo" as ADD_BA_BI
+
+    note right of (ADD_BA_CAT)
+    Account Category
+    contains
+    saving account
+    and checking account
+    end note
+
+    ADD_BA ..> ADD_BA_CAT : <<include>>
+    ADD_BA ..> ADD_BA_CASH : <<include>>
+    ADD_BA ..> ADD_BA_BI : <<include>>
+
+    usecase "Add Invest"  as ADD_IV
+    usecase "Update Invest"  as UP_IV
+    usecase "Delete Invest"  as DEL_IV
+
+    USER --> ADD_IV
+    USER --> UP_IV
+    USER --> DEL_IV
+
+    usecase "Add Invest\nCategory" as ADD_IV_CAT
+    usecase "Add Invest\nCash" as ADD_IV_CASH
+    usecase "Add Invest\nBankInfo" as ADD_IV_BI
+
+    ADD_IV ..> ADD_IV_CAT : <<include>>
+    ADD_IV ..> ADD_IV_CASH : <<include>>
+    ADD_IV ..> ADD_IV_BI : <<include>>
+}
+
+@enduml
