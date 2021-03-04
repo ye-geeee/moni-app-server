@@ -2,7 +2,7 @@
 
 actor 사용자 as USER
 
-rectangle "Asset CUD" {
+rectangle "Asset Category CUD" {
     usecase "Add Bank Account" as ADD_BA
     usecase "Update Bank Account" as UP_BA
     usecase "Delete Bank Account" as DEL_BA
