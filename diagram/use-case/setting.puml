@@ -1,0 +1,39 @@
+@startuml
+
+actor 사용자 as USER
+
+rectangle "Setting" {
+    usecase "Add Income Cateogry" as ADD_IN_C
+    usecase "Delete Income Category" as DEL_IN_C
+
+    usecase "Add Expense Cateogry" as ADD_EX_C
+    usecase "Delete Expense Category" as DEL_EX_C
+
+    usecase "Set Budget" as SET_BU
+    usecase "Set Budget Period" as SET_BU_PER
+    usecase "Set Budget Amount" as SET_BU_AM
+
+    usecase "Sync asset change\nfrom message" as SYNC_MSG
+    usecase "Set message exception" as SET_MSG_EX
+
+    USER --> ADD_IN_C
+    USER --> DEL_IN_C
+
+    USER --> ADD_EX_C
+    USER --> DEL_EX_C
+
+    USER --> SET_BU
+    SET_BU ..> SET_BU_PER : <<include>>
+    SET_BU ..> SET_BU_AM : <<include>>
+
+    USER --> SYNC_MSG
+    USER --> SET_MSG_EX
+
+    note right of (SET_BU)
+    User can see
+    budget status
+    from widget
+    end note
+}
+
+@enduml
