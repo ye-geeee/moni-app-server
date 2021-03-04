@@ -1,6 +1,7 @@
 @startuml authenticaion
 
 actor 사용자 as USER
+left to right direction
 
 rectangle Authentication {
     usecase "Create Account" as AUTH_CREATE

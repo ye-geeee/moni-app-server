@@ -1,6 +1,7 @@
 @startuml
 
 actor 사용자 as USER
+left to right direction
 
 rectangle "Asset CUD" {
     usecase "Add Bank Account" as ADD_BA
