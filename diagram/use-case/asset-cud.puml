@@ -2,7 +2,7 @@
 
 actor 사용자 as USER
 
-rectangle "Asset Category CUD" {
+rectangle "Asset CUD" {
     usecase "Add Bank Account" as ADD_BA
     usecase "Update Bank Account" as UP_BA
     usecase "Delete Bank Account" as DEL_BA
@@ -41,6 +41,16 @@ rectangle "Asset Category CUD" {
     ADD_IV ..> ADD_IV_CAT : <<include>>
     ADD_IV ..> ADD_IV_CASH : <<include>>
     ADD_IV ..> ADD_IV_BI : <<include>>
+
+    usecase "Add Expense" as ADD_EX
+    usecase "Add Income" as ADD_IN
+    usecase "Delete Expense" as DEL_EX
+    usecase "Delete Incode" as DEL_IN
+
+    USER --> ADD_EX
+    USER --> ADD_IN
+    USER --> DEL_EX
+    USER --> DEL_IN
 }
 
 @enduml
