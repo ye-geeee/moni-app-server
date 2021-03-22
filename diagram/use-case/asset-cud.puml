@@ -18,7 +18,7 @@ rectangle "Asset CUD" {
 
     note right of (ADD_BA_CAT)
     Account Category
-    contains
+    contains∂
     saving account
     and checking account
     end note
@@ -46,7 +46,7 @@ rectangle "Asset CUD" {
     usecase "Add Expense" as ADD_EX
     usecase "Add Income" as ADD_IN
     usecase "Delete Expense" as DEL_EX
-    usecase "Delete Incode" as DEL_IN
+    usecase "Delete Income" as DEL_IN
 
     USER --> ADD_EX
     USER --> ADD_IN
