@@ -1,0 +1,22 @@
+@startuml
+
+actor 사용자 as USER
+left to right direction
+
+rectangle "Asset Check" {
+    usecase "Check with Calendar" as CH_CAL
+    usecase "Check with Statistics" as CH_STA
+
+    usecase "Check by\nCategory" as CH_C
+    usecase "Check by\nPeriod" as CH_P
+
+    USER --> CH_CAL
+    USER --> CH_C
+    USER --> CH_P
+
+    CH_C --|> CH_STA
+    CH_P --|> CH_STA
+
+}
+
+@enduml

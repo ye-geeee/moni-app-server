@@ -18,7 +18,7 @@ rectangle "Asset CUD" {
 
     note right of (ADD_BA_CAT)
     Account Category
-    contains∂
+    contains
     saving account
     and checking account
     end note
