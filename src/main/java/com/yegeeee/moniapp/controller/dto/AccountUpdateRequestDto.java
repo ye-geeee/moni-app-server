@@ -7,19 +7,16 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class AccountSaveRequestDto {
-    private String name;
+public class AccountUpdateRequestDto {
     private Long budget;
 
     @Builder
-    AccountSaveRequestDto(String name, Long budget) {
-        this.name = name;
+    AccountUpdateRequestDto(Long budget) {
         this.budget = budget;
     }
 
     public Account toEntity() {
         return Account.builder()
-                .name(name)
                 .budget(budget)
                 .build();
     }
