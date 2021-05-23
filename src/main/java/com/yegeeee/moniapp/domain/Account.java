@@ -26,4 +26,8 @@ public class Account {
         this.name = name;
         this.budget = budget;
     }
+
+    public void update(Long budget) {
+        this.budget = budget;
+    }
 }

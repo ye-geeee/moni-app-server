@@ -1,13 +1,15 @@
 package com.yegeeee.moniapp.service;
 
+import com.yegeeee.moniapp.controller.dto.AccountResponseDto;
+import com.yegeeee.moniapp.controller.dto.AccountSaveRequestDto;
+import com.yegeeee.moniapp.controller.dto.AccountUpdateRequestDto;
 import com.yegeeee.moniapp.domain.Account;
 import com.yegeeee.moniapp.repository.AccountRepository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
-@Transactional
 public class AccountService {
 
     private final AccountRepository accountRepository;
@@ -16,26 +18,47 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public Account addAccount(Account account) {
-        accountRepository.findByName(account.getName())
+    @Transactional(readOnly = true)
+    public List<AccountResponseDto> findAll() {
+        return accountRepository.findAll()
+                .stream()
+                .map(AccountResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public AccountResponseDto findById(Long id) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new IllegalAccessError("[account id = " + id + "] No proper account information found"));
+        return new AccountResponseDto(account);
+    }
+
+    public Long save(AccountSaveRequestDto accountSaveRequestDto) {
+        accountRepository.findByName(accountSaveRequestDto.getName())
                 .ifPresent(m -> {
-                    throw new IllegalStateException("이미 존재하는 계좌 정보입니다.");
+                    throw new IllegalStateException("account already exists");
                 });
-
-        return accountRepository.save(account);
+        return accountRepository.save(accountSaveRequestDto.toEntity())
+                .getId();
     }
 
-/*    public Long updateAccount(String name) {
-        Account account = accountRepository.findByName(name)
-                .get();
-
-    };*/
-
-    public List<Account> findAccounts() {
-        return accountRepository.findAll();
+    @Transactional
+    public Long update(Long id, AccountUpdateRequestDto accountUpdateRequestDto) {
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new IllegalAccessError("[account id = " + id + "] No proper account information found"));
+        account.update(accountUpdateRequestDto.getBudget());
+        return id;
     }
 
-    public Optional<Account> findOne(Long accountId) {
-        return accountRepository.findById(accountId);
+    @Transactional
+    public void delete(Long id) {
+
+        Account account = accountRepository.findById(id)
+                .orElseThrow(() -> new IllegalAccessError("[account id = " + id + "] No proper account information found"));
+        accountRepository.delete(account);
+    }
+
+    public Account findAccount(Account account) {
+        return accountRepository.findByName(account.getName()).orElse(null);
     }
 }
